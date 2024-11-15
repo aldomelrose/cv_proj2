@@ -1,0 +1,164 @@
+Sign Language Recognition - Trial 1 Results
+=======================================
+
+Dataset Information:
+-----------------
+Training date: 2024-11-13 16:48:37
+Total samples: 8168
+Training samples: 4084
+Testing samples: 4084
+Number of features: 63
+Number of classes: 24
+
+Class Distribution:
+-----------------
+Class A:
+  Training: 175
+  Testing: 175
+  Total: 350
+
+Class B:
+  Training: 175
+  Testing: 175
+  Total: 350
+
+Class C:
+  Training: 172
+  Testing: 172
+  Total: 344
+
+Class D:
+  Training: 167
+  Testing: 167
+  Total: 334
+
+Class E:
+  Training: 174
+  Testing: 174
+  Total: 348
+
+Class F:
+  Training: 175
+  Testing: 175
+  Total: 350
+
+Class G:
+  Training: 173
+  Testing: 173
+  Total: 346
+
+Class H:
+  Training: 165
+  Testing: 165
+  Total: 330
+
+Class I:
+  Training: 178
+  Testing: 178
+  Total: 356
+
+Class K:
+  Training: 158
+  Testing: 158
+  Total: 316
+
+Class L:
+  Training: 151
+  Testing: 151
+  Total: 302
+
+Class M:
+  Training: 176
+  Testing: 176
+  Total: 352
+
+Class N:
+  Training: 172
+  Testing: 172
+  Total: 344
+
+Class O:
+  Training: 177
+  Testing: 177
+  Total: 354
+
+Class P:
+  Training: 176
+  Testing: 176
+  Total: 352
+
+Class Q:
+  Training: 174
+  Testing: 174
+  Total: 348
+
+Class R:
+  Training: 161
+  Testing: 161
+  Total: 322
+
+Class S:
+  Training: 175
+  Testing: 175
+  Total: 350
+
+Class T:
+  Training: 175
+  Testing: 175
+  Total: 350
+
+Class U:
+  Training: 159
+  Testing: 159
+  Total: 318
+
+Class V:
+  Training: 163
+  Testing: 163
+  Total: 326
+
+Class W:
+  Training: 167
+  Testing: 167
+  Total: 334
+
+Class X:
+  Training: 170
+  Testing: 170
+  Total: 340
+
+Class Y:
+  Training: 176
+  Testing: 176
+  Total: 352
+
+
+Model Performance Comparison:
+---------------------------
+
+RandomForest:
+Accuracy: 0.9699
+Macro Precision: 0.9703
+Macro Recall: 0.9693
+Macro F1: 0.9696
+ROC AUC: 0.9995
+Cross-validation mean: 0.8788
+Cross-validation std: 0.0052
+
+SVM:
+Accuracy: 0.9177
+Macro Precision: 0.9170
+Macro Recall: 0.9162
+Macro F1: 0.9157
+ROC AUC: 0.9977
+Cross-validation mean: 0.8915
+Cross-validation std: 0.0074
+
+XGBoost:
+Accuracy: 0.9988
+Macro Precision: 0.9988
+Macro Recall: 0.9987
+Macro F1: 0.9987
+ROC AUC: 1.0000
+Cross-validation mean: 0.9334
+Cross-validation std: 0.0065
