@@ -206,6 +206,59 @@ class SignLanguageInference:
         cap.release()
         cv2.destroyAllWindows()
 
+    def run_inference_on_frame(self, frame):
+        features, hand_landmarks = self.extract_features(frame)
+        final_prediction = None
+        avg_confidence = 0
+
+        if hand_landmarks is not None:
+            self.mp_drawing.draw_landmarks(
+                frame, 
+                hand_landmarks, 
+                self.mp_hands.HAND_CONNECTIONS,
+                self.mp_drawing_styles.get_default_hand_landmarks_style(),
+                self.mp_drawing_styles.get_default_hand_connections_style()
+            )
+        
+        if features is not None:
+            prediction = self.model.predict([features])[0]
+            probabilities = self.model.predict_proba([features])[0]
+            confidence = np.max(probabilities)
+            
+            prediction = self.get_letter(prediction)
+            
+            if confidence >= self.confidence_threshold:
+                self.prediction_history.append((prediction, confidence))
+                
+                if len(self.prediction_history) >= 3:
+                    prediction_weights = {}
+                    for pred, conf in self.prediction_history:
+                        prediction_weights[pred] = prediction_weights.get(pred, 0) + conf
+                    
+                    final_prediction = max(prediction_weights, key=prediction_weights.get)
+                    avg_confidence = prediction_weights[final_prediction] / len(self.prediction_history)
+                    
+                    # Draw only the box and prediction text
+                    h, w, _ = frame.shape
+                    x_coords = [lm.x for lm in hand_landmarks.landmark]
+                    y_coords = [lm.y for lm in hand_landmarks.landmark]
+                    
+                    x1 = int(min(x_coords) * w) - 10
+                    y1 = int(min(y_coords) * h) - 10
+                    x2 = int(max(x_coords) * w) + 10
+                    y2 = int(max(y_coords) * h) + 10
+                    
+                    # Color based on confidence
+                    color = (0, int(255 * avg_confidence), int(255 * (1 - avg_confidence)))
+                    
+                    # Draw box and prediction
+                    cv2.rectangle(frame, (x1, y1), (x2, y2), color, 2)
+                    text = f"{final_prediction} ({avg_confidence:.2f})"
+                    cv2.putText(frame, text, (x1, y1 - 10),
+                            cv2.FONT_HERSHEY_SIMPLEX, 2.0, color, 3)
+        
+        return frame, final_prediction, avg_confidence
+
 def main():
     model_path = 'results/trial1_20241112_220259/svm_model.joblib'     # change to your model path 
     
